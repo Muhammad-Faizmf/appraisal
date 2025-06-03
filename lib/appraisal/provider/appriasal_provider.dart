@@ -28,6 +28,7 @@ class AppraisalProvider extends ChangeNotifier {
   final TextEditingController weaknessController = TextEditingController();
   final TextEditingController trainingController = TextEditingController();
   final TextEditingController chiefRemarksController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
 
   final List<String> evaluations = ['1', '2', '3', '4', '5'];
 
@@ -41,6 +42,7 @@ class AppraisalProvider extends ChangeNotifier {
   List<Heirarchy>? realHeirarchyAppraisal;
 
   List<TrainingDevelopmentItem>? hrTraning;
+  List<MapEntry<int, Map<String, dynamic>>> groupedList = [];
   List<HRRemarkItem>? chroRemarks;
 
   List<Kpi>? kpisModel;
@@ -111,6 +113,7 @@ class AppraisalProvider extends ChangeNotifier {
     selectedApprisalHeirarchyIndex = null;
     showAppraisalDetails = false;
     isBioResponseTrue = false;
+    searchController.clear();
     notifyListeners();
   }
 
@@ -221,6 +224,10 @@ class AppraisalProvider extends ChangeNotifier {
         "appraisal/getTraining?EmpID=${heirarchyAppraisal![selectedApprisalHeirarchyIndex!].empId.toString()}",
       );
       hrTraning = traningModelFromJson(response.body).trainingDevelopement;
+      final groupedData = groupByCreater(
+        traningModelFromJson(response.body).trainingDevelopement,
+      );
+      groupedList = groupedData.entries.toList();
     } catch (e) {
       EasyLoading.showInfo(e.toString());
     }
@@ -242,6 +249,7 @@ class AppraisalProvider extends ChangeNotifier {
   }
 
   addTraining() async {
+    groupedList = [];
     try {
       EasyLoading.show(status: "Adding traning...");
       final response = await BaseClient.post(
@@ -261,6 +269,8 @@ class AppraisalProvider extends ChangeNotifier {
         final newHrTraning = TrainingDevelopmentItem(
           id: "0",
           period: "2025-1",
+          createrId: HiveService.getEmpId(),
+          createrName: "${HiveService.getName()} Training Recommendation",
           category: "Traning & Development",
           empId: heirarchyAppraisal![selectedApprisalHeirarchyIndex!]
               .empId
@@ -272,6 +282,8 @@ class AppraisalProvider extends ChangeNotifier {
 
         hrTraning!.add(newHrTraning);
         trainingController.clear();
+        final groupedData = groupByCreater(hrTraning!);
+        groupedList = groupedData.entries.toList();
       }
     } catch (e) {
       EasyLoading.showInfo(e.toString());
@@ -295,6 +307,24 @@ class AppraisalProvider extends ChangeNotifier {
         kpis: e.value,
       );
     }).toList();
+  }
+
+  Map<int, Map<String, dynamic>> groupByCreater(
+      List<TrainingDevelopmentItem> trainingList) {
+    final Map<int, Map<String, dynamic>> grouped = {};
+
+    for (var item in trainingList) {
+      if (grouped.containsKey(item.createrId)) {
+        grouped[item.createrId]!['descriptions'].add(item.description);
+      } else {
+        grouped[item.createrId!] = {
+          'createrName': item.createrName,
+          'descriptions': [item.description],
+        };
+      }
+    }
+
+    return grouped;
   }
 
   createBio(index) async {
@@ -341,7 +371,7 @@ class AppraisalProvider extends ChangeNotifier {
         api: "appraisal/createBio",
         payloadObj: payload,
       );
-      print("bio: ${response.body}");
+
       final jsonResponse = jsonDecode(response.body);
       if (jsonResponse['status'] == true) {
         isBioResponseTrue = true;

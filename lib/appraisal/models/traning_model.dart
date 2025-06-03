@@ -41,6 +41,8 @@ class TrainingDevelopmentItem {
   final String id;
   final String period;
   final String category;
+  final String? createrName;
+  final int? createrId;
   final String empId;
   final String description;
   final DateTime createdAt;
@@ -54,6 +56,8 @@ class TrainingDevelopmentItem {
     required this.description,
     required this.createdAt,
     required this.updatedAt,
+    this.createrName,
+    this.createrId,
   });
 
   factory TrainingDevelopmentItem.fromJson(Map<String, dynamic> json) {
@@ -63,6 +67,8 @@ class TrainingDevelopmentItem {
       category: json['Category'] ?? '',
       empId: json['EmpID'] ?? '',
       description: json['Description'] ?? '',
+      createrName: json['CreaterName'],
+      createrId: json['createrId'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );
@@ -75,6 +81,8 @@ class TrainingDevelopmentItem {
       'Category': category,
       'EmpID': empId,
       'Description': description,
+      'CreaterName': createrName,
+      'createrId': createrId,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
     };

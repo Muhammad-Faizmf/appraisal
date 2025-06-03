@@ -9,11 +9,11 @@ final router = GoRouter(
         name: 'login',
         path: '/',
         builder: (context, state) {
-          // return LoginScreen();
-          return HiveService.getLogin() != null &&
-                  HiveService.getLogin() == true
-              ? Dashboard()
-              : LoginScreen();
+          return LoginScreen();
+          // return HiveService.getLogin() != null &&
+          //         HiveService.getLogin() == true
+          //     ? Dashboard()
+          //     : LoginScreen();
         }),
     GoRoute(
       name: 'dashboard',

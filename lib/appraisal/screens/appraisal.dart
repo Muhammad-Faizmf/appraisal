@@ -43,9 +43,12 @@ class _AppraisalState extends State<Appraisal> {
                     Container(
                       margin: const EdgeInsets.only(left: 10.0),
                       child: CustomSearchField(
+                        controller: provider.searchController,
                         hint: "Search",
                         onChange: (value) {
-                          provider.searchAdjustmentApprisal(value);
+                          provider.searchAdjustmentApprisal(
+                            provider.searchController.text,
+                          );
                         },
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:appraisal_project/appraisal/provider/appriasal_provider.dart';
 import 'package:appraisal_project/core/hive_services.dart';
+import 'package:appraisal_project/utils/colors.dart';
 import 'package:appraisal_project/utils/text_formatter.dart';
 import 'package:appraisal_project/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -80,12 +81,30 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       ListView.builder(
                         shrinkWrap: true,
                         itemCount: provider.strengths?.length ?? 0,
                         itemBuilder: (context, index) => ListTile(
-                          title: Text(
-                            "${index + 1}. ${provider.strengths![index].description}",
+                          title: Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.green.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.green.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              "${index + 1}. ${provider.strengths![index].description}",
+                            ),
                           ),
                         ),
                       ),
@@ -140,12 +159,30 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       ListView.builder(
                         shrinkWrap: true,
                         itemCount: provider.weakness?.length ?? 0,
                         itemBuilder: (context, index) => ListTile(
-                          title: Text(
-                            "${index + 1}. ${provider.weakness![index].description}",
+                          title: Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.red.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              "${index + 1}. ${provider.weakness![index].description}",
+                            ),
                           ),
                         ),
                       ),
@@ -209,11 +246,18 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                 SizedBox(height: 10.0),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: provider.hrTraning?.length ?? 0,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: provider.groupedList.length,
                   itemBuilder: (context, index) {
+                    final group = provider.groupedList[index];
+                    final createrName = group.value['createrName'];
+                    final descriptions =
+                        group.value['descriptions'] as List<String>;
                     return Container(
                       margin: const EdgeInsets.symmetric(
-                          vertical: 6, horizontal: 12),
+                        vertical: 6,
+                        horizontal: 12,
+                      ),
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -227,12 +271,24 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                           ),
                         ],
                       ),
-                      child: Text(
-                        provider.hrTraning![index].description,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            createrName,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: ColorConstant.hoverColor,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          ...descriptions.map((desc) => Text('- $desc')),
+                        ],
                       ),
                     );
                   },
-                ),
+                )
               ],
             ),
           ),

@@ -72,24 +72,11 @@ class _CustomFrameState extends State<CustomFrame> {
                         Expanded(
                           child: Wrap(
                             children: [
-                              Text(
-                                "1. Poor  ",
-                                style: AppStyle.emojiTextlabel,
-                              ),
-                              Text(
-                                "2. Average  ",
-                                style: AppStyle.emojiTextlabel,
-                              ),
-                              Text(
-                                "3. Good  ",
-                                style: AppStyle.emojiTextlabel,
-                              ),
-                              Text(
-                                "4. Very Good  ",
-                                style: AppStyle.emojiTextlabel,
-                              ),
-                              Text("5. Excellent  ",
-                                  style: AppStyle.emojiTextlabel),
+                              evaluationText("1. Poor"),
+                              evaluationText("2. Average"),
+                              evaluationText("3. Good"),
+                              evaluationText("4. Very Good "),
+                              evaluationText("5. Excellent"),
                             ],
                           ),
                         ),
@@ -217,4 +204,30 @@ class _CustomFrameState extends State<CustomFrame> {
       ],
     );
   }
+}
+
+Widget evaluationText(String text) {
+  return Container(
+    margin: const EdgeInsets.symmetric(
+      vertical: 6,
+      horizontal: 12,
+    ),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.2),
+          spreadRadius: 2,
+          blurRadius: 10,
+          offset: const Offset(0, 3),
+        ),
+      ],
+    ),
+    child: Text(
+      text,
+      style: AppStyle.emojiTextlabel,
+    ),
+  );
 }
