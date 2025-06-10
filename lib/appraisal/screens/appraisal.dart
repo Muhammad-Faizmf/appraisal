@@ -73,6 +73,7 @@ class _AppraisalState extends State<Appraisal> {
                         context: context,
                         width: 1350,
                       ),
+                      height: MediaQuery.of(context).size.height * 0.8,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: provider.heirarchyAppraisal?.length ?? 0,

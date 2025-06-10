@@ -1,10 +1,14 @@
 import 'dart:convert';
 
+/// Convert JSON string to [TrainingDevelopmentResponse] object
 TrainingDevelopmentResponse traningModelFromJson(String str) =>
     TrainingDevelopmentResponse.fromJson(json.decode(str));
+
+/// Convert [TrainingDevelopmentResponse] object to JSON string
 String traningModelToJson(TrainingDevelopmentResponse data) =>
     json.encode(data.toJson());
 
+/// Root response model
 class TrainingDevelopmentResponse {
   final bool status;
   final String message;
@@ -37,6 +41,7 @@ class TrainingDevelopmentResponse {
   }
 }
 
+/// Individual training item model
 class TrainingDevelopmentItem {
   final String id;
   final String period;
@@ -68,7 +73,7 @@ class TrainingDevelopmentItem {
       empId: json['EmpID'] ?? '',
       description: json['Description'] ?? '',
       createrName: json['CreaterName'],
-      createrId: json['createrId'],
+      createrId: int.tryParse(json['createrId']?.toString() ?? ''),
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );

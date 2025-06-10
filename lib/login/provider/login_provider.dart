@@ -8,8 +8,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginProvider extends ChangeNotifier {
-  TextEditingController userName = TextEditingController(text: "280");
-  TextEditingController password = TextEditingController(text: "786okok");
+  TextEditingController userName = TextEditingController();
+  TextEditingController password = TextEditingController();
   final bool _rememberPassword = false;
   bool _obscureText = true;
   bool get obscureText => _obscureText;
@@ -46,60 +46,62 @@ class LoginProvider extends ChangeNotifier {
         },
       );
       loginModel = loginModelFromJson(response.body);
+
       if (loginModel?.status == true) {
-        HiveService.setTokken(loginModel!.tokken!);
+        HiveService.setTokken(loginModel!.tokken);
         HiveService.setLogin(true);
-        HiveService.setEmpId(loginModel!.loginData!.empId!);
-        HiveService.setStdEmpId(loginModel!.loginData!.stdEmpId!);
+        HiveService.setEmpId(loginModel!.loginData.empId);
+        HiveService.setStdEmpId(loginModel!.loginData.stdEmpId);
         HiveService.setFirstSupervisorId(
-            loginModel!.loginData!.uFirstSupervisorId!);
-        print(
-            "first supervisor id: ${HiveService.getFirstSupervisorId().toString()}");
+            loginModel!.loginData.uFirstSupervisorId);
         HiveService.setSecondSupervisorId(
-            loginModel!.loginData!.uSecondSupervisorId!);
-        HiveService.setName(loginModel!.loginData!.name!);
-        HiveService.setDepartmentId(loginModel!.loginData!.departmentId!);
-        HiveService.setDepartmentName(loginModel!.loginData!.departmentName!);
-        HiveService.setPositionId(loginModel!.loginData!.positionId!);
-        HiveService.setPositionName(loginModel!.loginData!.positionName!);
-        HiveService.setLocationId(loginModel!.loginData!.locationId!);
-        HiveService.setLocationName(loginModel!.loginData!.locationName!);
-        HiveService.setPostionTypeId(loginModel!.loginData!.positionTypeId!);
-        HiveService.setPostionTypeName(loginModel!.loginData!.positionType!);
+            loginModel!.loginData.uSecondSupervisorId);
+        HiveService.setName(loginModel!.loginData.name);
+        HiveService.setDepartmentId(loginModel!.loginData.departmentId);
+        HiveService.setDepartmentName(loginModel!.loginData.departmentName);
+        HiveService.setPositionId(loginModel!.loginData.positionId);
+        HiveService.setPositionName(loginModel!.loginData.positionName);
+        HiveService.setLocationId(loginModel!.loginData.locationId);
+        HiveService.setLocationName(loginModel!.loginData.locationName);
+        HiveService.setPostionTypeId(loginModel!.loginData.positionTypeId);
+        HiveService.setPostionTypeName(loginModel!.loginData.positionType);
         HiveService.setDateOfJoining(DateFormatter.dayMonthYearFormat(
-          loginModel!.loginData!.joinDate!,
+          loginModel!.loginData.joinDate,
         ));
         HiveService.setTenureInDays(
-          loginModel!.loginData!.tenureInDays!,
+          loginModel!.loginData.tenureInDays,
         );
         HiveService.setTenureInYears(
-          loginModel!.loginData!.tenureInYears!,
+          loginModel!.loginData.tenureInYears,
         );
         HiveService.setGradeId(
-          loginModel!.loginData!.grade!,
+          loginModel!.loginData.grade,
         );
         HiveService.setGradeName(
-          loginModel!.loginData!.gradeName!,
+          loginModel!.loginData.gradeName,
         );
         HiveService.setContractType(
-          loginModel!.loginData!.employeeContractType!,
+          loginModel!.loginData.employeeContractType,
         );
         HiveService.setSubDepartmentId(
-          loginModel!.loginData!.subDepartmentId!,
+          loginModel!.loginData.subDepartmentId,
         );
         HiveService.setSubDepartmentName(
-          loginModel!.loginData!.subDepartment!,
+          loginModel!.loginData.subDepartment,
         );
         HiveService.setGrossSalary(
-          loginModel!.loginData!.grossSalary!.toDouble(),
+          loginModel!.loginData.grossSalary.toDouble(),
         );
         HiveService.setTotalSalary(
-          loginModel!.loginData!.totalSalary!.toDouble(),
+          loginModel!.loginData.totalSalary!.toDouble(),
         );
         HiveService.setBonus(
-          loginModel!.loginData!.bonus!.toDouble(),
+          loginModel!.loginData.bonus!.toDouble(),
         );
+        EasyLoading.showSuccess(loginModel!.message);
         GoRouter.of(context).pushReplacement("/dashboard");
+      } else {
+        EasyLoading.showError(loginModel!.message);
       }
       password.clear();
       userName.clear();

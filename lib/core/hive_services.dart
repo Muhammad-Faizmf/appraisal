@@ -299,9 +299,9 @@ class HiveService {
     await _box!.deleteFromDisk();
   }
 
-  // static void deleteHiveData() {
-  //   _box!.put(login, false);
-  //   _box!.put(tenureInDays, "");
-  //   _box!.put(tokken, "");
-  // }
+  static void deleteHiveData() {
+    _box!.put(login, false);
+    _box!.put(tenureInDays, "");
+    _box!.put(tokken, "");
+  }
 }

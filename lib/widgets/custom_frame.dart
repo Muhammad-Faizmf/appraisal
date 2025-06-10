@@ -61,26 +61,29 @@ class _CustomFrameState extends State<CustomFrame> {
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Expanded(
+                          flex: 2,
                           child: Text(
                             widget.kpis![index].childDescription!,
                             style: AppStyle.txtHeadingDarkBold16,
                           ),
                         ),
                         Expanded(
+                          flex: 4,
                           child: Wrap(
                             children: [
-                              evaluationText("1. Poor"),
-                              evaluationText("2. Average"),
-                              evaluationText("3. Good"),
-                              evaluationText("4. Very Good "),
                               evaluationText("5. Excellent"),
+                              evaluationText("4. Very Good "),
+                              evaluationText("3. Good"),
+                              evaluationText("2. Average"),
+                              evaluationText("1. Poor"),
                             ],
                           ),
                         ),
                         Expanded(
+                          flex: 2,
                           child: Container(
                             alignment: Alignment.centerRight,
                             child: Wrap(
@@ -218,6 +221,7 @@ Widget evaluationText(String text) {
       borderRadius: BorderRadius.circular(12),
       boxShadow: [
         BoxShadow(
+          // ignore: deprecated_member_use
           color: Colors.grey.withOpacity(0.2),
           spreadRadius: 2,
           blurRadius: 10,

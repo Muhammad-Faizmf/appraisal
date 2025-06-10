@@ -224,6 +224,7 @@ class AppraisalProvider extends ChangeNotifier {
         "appraisal/getTraining?EmpID=${heirarchyAppraisal![selectedApprisalHeirarchyIndex!].empId.toString()}",
       );
       hrTraning = traningModelFromJson(response.body).trainingDevelopement;
+   
       final groupedData = groupByCreater(
         traningModelFromJson(response.body).trainingDevelopement,
       );
@@ -262,6 +263,8 @@ class AppraisalProvider extends ChangeNotifier {
                 .toString(),
             "Description": trainingController.text.trim()
           });
+
+
 
       if (response.statusCode == 200) {
         hrTraning ??= [];

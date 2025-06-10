@@ -118,6 +118,7 @@ class ColorConstant {
   static Color orangeColor = const Color(0xfff18800);
 
   static Color reportEvenColor = const Color(0xffEEEEEE);
+  // ignore: deprecated_member_use
   static Color reportOddColor = const Color(0xffEAEAEA).withOpacity(0.2);
 
   static const Color blueishCard = Color(0xffD1E9FF);

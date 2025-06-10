@@ -4,109 +4,106 @@
 
 import 'dart:convert';
 
-LoginModel loginModelFromJson(String str) =>
-    LoginModel.fromJson(json.decode(str));
+LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str));
 
 String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
-  bool? status;
-  String? message;
-  LoginData? loginData;
-  String? tokken;
+    bool status;
+    String message;
+    LoginData loginData;
+    String tokken;
 
-  LoginModel({
-    this.status,
-    this.message,
-    this.loginData,
-    this.tokken,
-  });
+    LoginModel({
+        required this.status,
+        required this.message,
+        required this.loginData,
+        required this.tokken,
+    });
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
+    factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         status: json["status"],
         message: json["message"],
-        loginData: json["loginData"] == null
-            ? null
-            : LoginData.fromJson(json["loginData"]),
+        loginData: LoginData.fromJson(json["loginData"]),
         tokken: json["tokken"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "loginData": loginData?.toJson(),
+        "loginData": loginData.toJson(),
         "tokken": tokken,
-      };
+    };
 }
 
 class LoginData {
-  String? stdEmpId;
-  int? empId;
-  String? departmentName;
-  int? departmentId;
-  String? name;
-  String? positionName;
-  int? uFirstSupervisorId;
-  String? uFirstSupervisorName;
-  int? uSecondSupervisorId;
-  String? uSecondSupervisorName;
-  String? userCode;
-  String? password;
-  String? subDepartment;
-  int? subDepartmentId;
-  int? positionId;
-  String? locationName;
-  String? email;
-  int? locationId;
-  String? positionType;
-  int? positionTypeId;
-  String? employeeContractType;
-  String? adminSupervisor;
-  DateTime? joinDate;
-  String? tenureInYears;
-  int? tenureInDays;
-  int? grade;
-  String? gradeName;
-  int? grossSalary;
-  String? uFlgActive;
-  int? bonus;
-  int? totalSalary;
+    String stdEmpId;
+    int empId;
+    String departmentName;
+    int departmentId;
+    String name;
+    String positionName;
+    int uFirstSupervisorId;
+    String uFirstSupervisorName;
+    int uSecondSupervisorId;
+    String uSecondSupervisorName;
+    String userCode;
+    String password;
+    String subDepartment;
+    int subDepartmentId;
+    int positionId;
+    String locationName;
+    String email;
+    int locationId;
+    String positionType;
+    int positionTypeId;
+    String employeeContractType;
+    String adminSupervisor;
+    DateTime joinDate;
+    String tenureInYears;
+    int tenureInDays;
+    int grade;
+    String gradeName;
+    int grossSalary;
+    String uFlgActive;
+    dynamic bonus;
+    dynamic totalSalary;
 
-  LoginData({
-    this.stdEmpId,
-    this.empId,
-    this.departmentName,
-    this.departmentId,
-    this.name,
-    this.positionName,
-    this.uFirstSupervisorId,
-    this.uFirstSupervisorName,
-    this.uSecondSupervisorId,
-    this.uSecondSupervisorName,
-    this.userCode,
-    this.password,
-    this.subDepartment,
-    this.subDepartmentId,
-    this.positionId,
-    this.locationName,
-    this.email,
-    this.locationId,
-    this.positionType,
-    this.positionTypeId,
-    this.employeeContractType,
-    this.adminSupervisor,
-    this.joinDate,
-    this.tenureInYears,
-    this.tenureInDays,
-    this.grade,
-    this.gradeName,
-    this.grossSalary,
-    this.uFlgActive,
-    this.bonus,
-    this.totalSalary,
-  });
+    LoginData({
+        required this.stdEmpId,
+        required this.empId,
+        required this.departmentName,
+        required this.departmentId,
+        required this.name,
+        required this.positionName,
+        required this.uFirstSupervisorId,
+        required this.uFirstSupervisorName,
+        required this.uSecondSupervisorId,
+        required this.uSecondSupervisorName,
+        required this.userCode,
+        required this.password,
+        required this.subDepartment,
+        required this.subDepartmentId,
+        required this.positionId,
+        required this.locationName,
+        required this.email,
+        required this.locationId,
+        required this.positionType,
+        required this.positionTypeId,
+        required this.employeeContractType,
+        required this.adminSupervisor,
+        required this.joinDate,
+        required this.tenureInYears,
+        required this.tenureInDays,
+        required this.grade,
+        required this.gradeName,
+        required this.grossSalary,
+        required this.uFlgActive,
+        required this.bonus,
+        required this.totalSalary,
+    });
 
-  factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
+    factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
         stdEmpId: json["StdEmpId"],
         empId: json["EmpID"],
         departmentName: json["DepartmentName"],
@@ -129,19 +126,18 @@ class LoginData {
         positionTypeId: json["PositionTypeID"],
         employeeContractType: json["EmployeeContractType"],
         adminSupervisor: json["AdminSupervisor"],
-        joinDate:
-            json["JoinDate"] == null ? null : DateTime.parse(json["JoinDate"]),
+        joinDate: DateTime.parse(json["JoinDate"]),
         tenureInYears: json["TenureInYears"],
         tenureInDays: json["TenureInDays"],
         grade: json["Grade"],
         gradeName: json["GradeName"],
         grossSalary: json["GrossSalary"],
         uFlgActive: json["U_flgActive"],
-        bonus: json["BONUS"],
-        totalSalary: json["TotalSalary"],
-      );
+        bonus: json["BONUS"]??0,
+        totalSalary: json["TotalSalary"]??0,
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "StdEmpId": stdEmpId,
         "EmpID": empId,
         "DepartmentName": departmentName,
@@ -164,7 +160,7 @@ class LoginData {
         "PositionTypeID": positionTypeId,
         "EmployeeContractType": employeeContractType,
         "AdminSupervisor": adminSupervisor,
-        "JoinDate": joinDate?.toIso8601String(),
+        "JoinDate": joinDate.toIso8601String(),
         "TenureInYears": tenureInYears,
         "TenureInDays": tenureInDays,
         "Grade": grade,
@@ -173,5 +169,5 @@ class LoginData {
         "U_flgActive": uFlgActive,
         "BONUS": bonus,
         "TotalSalary": totalSalary,
-      };
+    };
 }

@@ -48,39 +48,59 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: provider.strengthController,
-                              inputFormatters:
-                                  TextFormatter.firstLetterCapitalize,
-                              decoration: const InputDecoration(
-                                hintText: 'Enter strength...',
+                      provider
+                                  .heirarchyAppraisal![
+                                      provider.selectedApprisalHeirarchyIndex!]
+                                  .firstSupervisorEmpId ==
+                              HiveService.getEmpId()
+                          ? SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.41,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: TextField(
+                                      controller: provider.strengthController,
+                                      decoration: InputDecoration(
+                                        hint: Text("Enter Strength"),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 10),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 8),
+                                  OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: Colors.green,
+                                      side: BorderSide(color: Colors.green),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 12, vertical: 10),
+                                    ),
+                                    onPressed: provider
+                                                .heirarchyAppraisal![provider
+                                                    .selectedApprisalHeirarchyIndex!]
+                                                .firstSupervisorEmpId !=
+                                            HiveService.getEmpId()
+                                        ? null
+                                        : () {
+                                            if (provider.strengthController.text
+                                                .trim()
+                                                .isEmpty) {
+                                              EasyLoading.showInfo(
+                                                  "Strength field can not be empty");
+                                              return;
+                                            }
+                                            provider.addStrength();
+                                          },
+                                    child: Text('Add'),
+                                  )
+                                ],
                               ),
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: provider
-                                        .heirarchyAppraisal![provider
-                                            .selectedApprisalHeirarchyIndex!]
-                                        .firstSupervisorEmpId !=
-                                    HiveService.getEmpId()
-                                ? null
-                                : () {
-                                    if (provider.strengthController.text
-                                        .trim()
-                                        .isEmpty) {
-                                      EasyLoading.showInfo(
-                                          "Strength field can not be empty");
-                                      return;
-                                    }
-                                    provider.addStrength();
-                                  },
-                          ),
-                        ],
-                      ),
+                            )
+                          : SizedBox.shrink(),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -91,10 +111,12 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                           title: Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
+                              // ignore: deprecated_member_use
                               color: Colors.green.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(12),
                               boxShadow: [
                                 BoxShadow(
+                                  // ignore: deprecated_member_use
                                   color: Colors.green.withOpacity(0.2),
                                   spreadRadius: 2,
                                   blurRadius: 10,
@@ -112,7 +134,9 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                   ),
                 ),
               ),
-
+              Divider(
+                thickness: 3,
+              ),
               // Weakness column
               Expanded(
                 child: Padding(
@@ -126,39 +150,60 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: provider.weaknessController,
-                              inputFormatters:
-                                  TextFormatter.firstLetterCapitalize,
-                              decoration: const InputDecoration(
-                                hintText: 'Enter weakness...',
+                      provider
+                                  .heirarchyAppraisal![
+                                      provider.selectedApprisalHeirarchyIndex!]
+                                  .firstSupervisorEmpId ==
+                              HiveService.getEmpId()
+                          ? SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.41,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: TextField(
+                                      controller: provider.weaknessController,
+                                      decoration: InputDecoration(
+                                        hint: Text("Enter Strength"),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 10),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 8),
+                                  OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: Colors.red,
+                                      side: BorderSide(color: Colors.red),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 12, vertical: 10),
+                                    ),
+                                    onPressed: provider
+                                                .heirarchyAppraisal![provider
+                                                    .selectedApprisalHeirarchyIndex!]
+                                                .firstSupervisorEmpId !=
+                                            HiveService.getEmpId()
+                                        ? null
+                                        : () {
+                                            if (provider.weaknessController.text
+                                                .trim()
+                                                .isEmpty) {
+                                              EasyLoading.showInfo(
+                                                  "Weakness field can not be empty");
+                                              return;
+                                            }
+                                            provider.addWeakness();
+                                          },
+                                    child: Text('Add'),
+                                  )
+                                ],
                               ),
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: provider
-                                        .heirarchyAppraisal![provider
-                                            .selectedApprisalHeirarchyIndex!]
-                                        .firstSupervisorEmpId !=
-                                    HiveService.getEmpId()
-                                ? null
-                                : () {
-                                    if (provider.weaknessController.text
-                                        .trim()
-                                        .isEmpty) {
-                                      EasyLoading.showInfo(
-                                          "Weakness field can not be empty");
-                                      return;
-                                    }
-                                    provider.addWeakness();
-                                  },
-                          ),
-                        ],
-                      ),
+                            )
+                          : SizedBox.shrink(),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -169,10 +214,12 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                           title: Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
+                              // ignore: deprecated_member_use
                               color: Colors.red.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(12),
                               boxShadow: [
                                 BoxShadow(
+                                  // ignore: deprecated_member_use
                                   color: Colors.red.withOpacity(0.2),
                                   spreadRadius: 2,
                                   blurRadius: 10,
@@ -202,47 +249,66 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                TextField(
-                  controller: provider.trainingController,
-                  inputFormatters: TextFormatter.firstLetterCapitalize,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                    hintText: "Enter training & recommendation details...",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    contentPadding: const EdgeInsets.all(12),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: CustomButton(
-                    onTap: () {
-                      if (provider.trainingController.text.trim().isEmpty) {
-                        EasyLoading.showInfo(
-                          "training & recommendation is mandatory",
-                        );
-                        return;
-                      }
-                      if (provider
-                                  .heirarchyAppraisal![
-                                      provider.selectedApprisalHeirarchyIndex!]
-                                  .firstSupervisorEmpId !=
-                              HiveService.getEmpId() &&
-                          provider
-                                  .heirarchyAppraisal![
-                                      provider.selectedApprisalHeirarchyIndex!]
-                                  .secondSupervisorEmpId !=
-                              HiveService.getEmpId()) {
-                        EasyLoading.showInfo(
-                          "Only supervisors can add this details",
-                        );
-                        return;
-                      }
-                      provider.addTraining();
-                    },
-                    btnname: "Add",
-                  ),
-                ),
+                provider
+                                .heirarchyAppraisal![
+                                    provider.selectedApprisalHeirarchyIndex!]
+                                .firstSupervisorEmpId ==
+                            HiveService.getEmpId() ||
+                        provider
+                                .heirarchyAppraisal![
+                                    provider.selectedApprisalHeirarchyIndex!]
+                                .secondSupervisorEmpId ==
+                            HiveService.getEmpId()
+                    ? Column(
+                        children: [
+                          TextField(
+                            controller: provider.trainingController,
+                            inputFormatters:
+                                TextFormatter.firstLetterCapitalize,
+                            maxLines: 5,
+                            decoration: InputDecoration(
+                              hintText:
+                                  "Enter training & recommendation details...",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              contentPadding: const EdgeInsets.all(12),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: CustomButton(
+                              onTap: () {
+                                if (provider.trainingController.text
+                                    .trim()
+                                    .isEmpty) {
+                                  EasyLoading.showInfo(
+                                    "training & recommendation is mandatory",
+                                  );
+                                  return;
+                                }
+                                if (provider
+                                            .heirarchyAppraisal![provider
+                                                .selectedApprisalHeirarchyIndex!]
+                                            .firstSupervisorEmpId !=
+                                        HiveService.getEmpId() &&
+                                    provider
+                                            .heirarchyAppraisal![provider
+                                                .selectedApprisalHeirarchyIndex!]
+                                            .secondSupervisorEmpId !=
+                                        HiveService.getEmpId()) {
+                                  EasyLoading.showInfo(
+                                    "Only supervisors can add this details",
+                                  );
+                                  return;
+                                }
+                                provider.addTraining();
+                              },
+                              btnname: "Add",
+                            ),
+                          ),
+                        ],
+                      )
+                    : SizedBox.shrink(),
                 SizedBox(height: 10.0),
                 ListView.builder(
                   shrinkWrap: true,
@@ -264,6 +330,7 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
+                            // ignore: deprecated_member_use
                             color: Colors.grey.withOpacity(0.2),
                             spreadRadius: 5,
                             blurRadius: 10,
@@ -302,65 +369,102 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                TextField(
-                  controller: provider.chiefRemarksController,
-                  maxLines: 2,
-                  inputFormatters: TextFormatter.firstLetterCapitalize,
-                  decoration: InputDecoration(
-                    hintText: "Enter chief remarks...",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    contentPadding: const EdgeInsets.all(12),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: CustomButton(
-                    onTap: () {
-                      if (provider.chiefRemarksController.text.trim().isEmpty) {
-                        EasyLoading.showInfo("Chief remarks is mandatory");
-                        return;
-                      }
-                      if (provider
-                              .heirarchyAppraisal![
-                                  provider.selectedApprisalHeirarchyIndex!]
-                              .departmentalChiefId !=
-                          HiveService.getEmpId()) {
-                        EasyLoading.showInfo(
-                          "Only chief can add this remarks",
-                        );
-                        return;
-                      }
-                      provider.addChiefRemarks();
-                    },
-                    btnname: "Add",
-                  ),
-                ),
+                provider
+                            .heirarchyAppraisal![
+                                provider.selectedApprisalHeirarchyIndex!]
+                            .departmentalChiefId ==
+                        HiveService.getEmpId()
+                    ? Column(
+                        children: [
+                          TextField(
+                            controller: provider.chiefRemarksController,
+                            maxLines: 2,
+                            inputFormatters:
+                                TextFormatter.firstLetterCapitalize,
+                            decoration: InputDecoration(
+                              hintText: "Enter chief remarks...",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              contentPadding: const EdgeInsets.all(12),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: CustomButton(
+                              onTap: () {
+                                if (provider.chiefRemarksController.text
+                                    .trim()
+                                    .isEmpty) {
+                                  EasyLoading.showInfo(
+                                      "Chief remarks is mandatory");
+                                  return;
+                                }
+                                if (provider
+                                        .heirarchyAppraisal![provider
+                                            .selectedApprisalHeirarchyIndex!]
+                                        .departmentalChiefId !=
+                                    HiveService.getEmpId()) {
+                                  EasyLoading.showInfo(
+                                    "Only chief can add this remarks",
+                                  );
+                                  return;
+                                }
+                                provider.addChiefRemarks();
+                              },
+                              btnname: "Add",
+                            ),
+                          ),
+                        ],
+                      )
+                    : SizedBox.shrink(),
                 SizedBox(height: 10.0),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: provider.chroRemarks?.length ?? 0,
-                  itemBuilder: (context, index) => Container(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 5,
-                          blurRadius: 10,
-                          offset: const Offset(0, 3),
+                provider.chroRemarks!.isEmpty
+                    ? Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 6, horizontal: 12),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              // ignore: deprecated_member_use
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 5,
+                              blurRadius: 10,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: Text(
-                      provider.chroRemarks![index].description,
-                    ),
-                  ),
-                ),
+                        child: Text(
+                          "Remarks Not Given Yet",
+                        ),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: provider.chroRemarks?.length ?? 0,
+                        itemBuilder: (context, index) => Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 12),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                // ignore: deprecated_member_use
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 5,
+                                blurRadius: 10,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            provider.chroRemarks![index].description,
+                          ),
+                        ),
+                      ),
               ],
             ),
           )
