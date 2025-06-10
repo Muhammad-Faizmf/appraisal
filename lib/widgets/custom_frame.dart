@@ -97,18 +97,14 @@ class _CustomFrameState extends State<CustomFrame> {
                                   ),
                                   child: IgnorePointer(
                                     ignoring:
-                                        provider.groupedKpis!.last.kpis.every(
-                                              (kpi) =>
-                                                  kpi.firstSupervisorMarks !=
-                                                      null &&
-                                                  kpi.firstSupervisorMarks
-                                                      .toString()
-                                                      .trim()
-                                                      .isNotEmpty,
-                                            ) ||
-                                            HiveService.getEmpId() !=
-                                                widget.kpis![index]
-                                                    .firstSupervisorEmplId,
+                                       provider.groupedKpis!.last.kpis
+                                            .every(
+                                          (kpi) =>
+                                              kpi.firstSupervisorMarks != null,
+                                        ) ||
+                                        HiveService.getEmpId() !=
+                                            widget.kpis![index]
+                                                .firstSupervisorEmplId,
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
                                         hint: Text("Select 1st"),
@@ -147,25 +143,19 @@ class _CustomFrameState extends State<CustomFrame> {
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: IgnorePointer(
-                                    ignoring: widget.kpis![index]
-                                                .secondSupervisorEmplId !=
-                                            HiveService.getEmpId() ||
-                                        (provider.groupedKpis!.last.kpis.every(
-                                                (kpi) =>
-                                                    kpi.firstSupervisorMarks !=
-                                                        null &&
-                                                    kpi.firstSupervisorMarks
-                                                        .toString()
-                                                        .trim()
-                                                        .isNotEmpty) &&
-                                            provider.groupedKpis!.last.kpis
+                                    ignoring: !(widget.kpis![index]
+                                                    .secondSupervisorEmplId ==
+                                                HiveService.getEmpId() &&
+                                            provider.groupedKpis!
+                                                .expand((gkpi) => gkpi.kpis)
                                                 .every((kpi) =>
-                                                    kpi.secondSupervisorMarks !=
-                                                        null &&
-                                                    kpi.secondSupervisorMarks
-                                                        .toString()
-                                                        .trim()
-                                                        .isNotEmpty)),
+                                                    kpi.firstSupervisorMarks !=
+                                                    null)) ||
+                                        provider.groupedKpis!
+                                            .expand((gkpi) => gkpi.kpis)
+                                            .every((kpi) =>
+                                                kpi.secondSupervisorMarks !=
+                                                null),
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
                                         hint: Text("Select 2nd"),

@@ -3,6 +3,7 @@ import 'package:appraisal_project/core/hive_services.dart';
 import 'package:appraisal_project/utils/colors.dart';
 import 'package:appraisal_project/utils/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -48,6 +49,15 @@ class _DashboardState extends State<Dashboard> {
                           HiveService.getName().toString(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
+                          IconButton(
+                                onPressed: () {
+                                  HiveService.deleteHiveData();
+                                  GoRouter.of(context).go("/");
+                                },
+                                icon: Icon(
+                                  Icons.logout,
+                                  color: Colors.white,
+                                ))
                       ],
                     ),
                   ],

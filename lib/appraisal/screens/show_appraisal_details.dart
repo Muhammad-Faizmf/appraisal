@@ -17,14 +17,7 @@ class ShowAppraisalDetails extends StatefulWidget {
 }
 
 class _ShowAppraisalDetailsState extends State<ShowAppraisalDetails> {
-  @override
-  void initState() {
-    var provider = Provider.of<AppraisalProvider>(context, listen: false);
-    provider.getStrengthAndWeakness();
-    provider.getTraning();
-    provider.getCHRORemarks();
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -299,7 +299,7 @@ class HiveService {
     await _box!.deleteFromDisk();
   }
 
-  static void deleteHiveData() {
+  static void deleteHiveData()  async{
     _box!.put(login, false);
     _box!.put(tenureInDays, "");
     _box!.put(tokken, "");
