@@ -1,5 +1,5 @@
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/utils/scale_size.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/utils/scale_size.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

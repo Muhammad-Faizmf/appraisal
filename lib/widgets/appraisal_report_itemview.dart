@@ -1,6 +1,6 @@
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/utils/scale_size.dart';
-import 'package:appraisal_project/utils/text_styles.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/utils/scale_size.dart';
+import 'package:Appraisal/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 

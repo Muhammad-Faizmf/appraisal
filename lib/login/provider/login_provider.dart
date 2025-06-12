@@ -1,11 +1,12 @@
-import 'package:appraisal_project/core/base_client.dart';
-import 'package:appraisal_project/core/core_urls.dart';
-import 'package:appraisal_project/core/date_formatter.dart';
-import 'package:appraisal_project/core/hive_services.dart';
-import 'package:appraisal_project/login/models/login_model.dart';
+import 'package:Appraisal/appraisal/screens/dashboard.dart';
+import 'package:Appraisal/core/base_client.dart';
+import 'package:Appraisal/core/core_urls.dart';
+import 'package:Appraisal/core/date_formatter.dart';
+import 'package:Appraisal/core/hive_services.dart';
+import 'package:Appraisal/login/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:go_router/go_router.dart';
+
 
 class LoginProvider extends ChangeNotifier {
   TextEditingController userName = TextEditingController();
@@ -45,9 +46,11 @@ class LoginProvider extends ChangeNotifier {
           "password": password.text,
         },
       );
+
       loginModel = loginModelFromJson(response.body);
 
-      if (loginModel?.status == true) {
+
+      if (loginModel?.status??false) {
         HiveService.setTokken(loginModel!.tokken);
         HiveService.setLogin(true);
         HiveService.setEmpId(loginModel!.loginData.empId);
@@ -99,7 +102,10 @@ class LoginProvider extends ChangeNotifier {
           loginModel!.loginData.bonus!.toDouble(),
         );
         EasyLoading.showSuccess(loginModel!.message);
-        GoRouter.of(context).pushReplacement("/dashboard");
+      Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Dashboard()),
+  );
       } else {
         EasyLoading.showError(loginModel!.message);
       }

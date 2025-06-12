@@ -1,11 +1,11 @@
-import 'package:appraisal_project/appraisal/provider/appriasal_provider.dart';
-import 'package:appraisal_project/appraisal/screens/show_appraisal_details.dart';
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/widgets/appraisal_report_itemview.dart';
-import 'package:appraisal_project/widgets/apprisal_report_header.dart';
-import 'package:appraisal_project/widgets/custom_base_container.dart';
-import 'package:appraisal_project/utils/scale_size.dart';
-import 'package:appraisal_project/widgets/custom_search_field.dart';
+import 'package:Appraisal/appraisal/provider/appriasal_provider.dart';
+import 'package:Appraisal/appraisal/screens/show_appraisal_details.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/widgets/appraisal_report_itemview.dart';
+import 'package:Appraisal/widgets/apprisal_report_header.dart';
+import 'package:Appraisal/widgets/custom_base_container.dart';
+import 'package:Appraisal/utils/scale_size.dart';
+import 'package:Appraisal/widgets/custom_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

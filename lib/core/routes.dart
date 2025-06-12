@@ -1,6 +1,6 @@
-import 'package:appraisal_project/appraisal/screens/dashboard.dart';
-import 'package:appraisal_project/core/hive_services.dart';
-import 'package:appraisal_project/login/screens/login.dart';
+import 'package:Appraisal/appraisal/screens/dashboard.dart';
+import 'package:Appraisal/core/hive_services.dart';
+import 'package:Appraisal/login/screens/login.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -9,7 +9,7 @@ final router = GoRouter(
         name: 'login',
         path: '/',
         builder: (context, state) {
- 
+        
           return HiveService.getLogin() != null &&
                   HiveService.getLogin() == true
               ? Dashboard()

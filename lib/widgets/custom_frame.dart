@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:appraisal_project/appraisal/models/get_all_kpis.dart';
-import 'package:appraisal_project/appraisal/provider/appriasal_provider.dart';
-import 'package:appraisal_project/core/hive_services.dart';
+import 'package:Appraisal/appraisal/models/get_all_kpis.dart';
+import 'package:Appraisal/appraisal/provider/appriasal_provider.dart';
+import 'package:Appraisal/core/hive_services.dart';
 
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/utils/scale_size.dart';
-import 'package:appraisal_project/utils/text_styles.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/utils/scale_size.dart';
+import 'package:Appraisal/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,8 @@
-import 'package:appraisal_project/appraisal/provider/appriasal_provider.dart';
-import 'package:appraisal_project/core/easyloading_config.dart';
-import 'package:appraisal_project/core/hive_services.dart';
-import 'package:appraisal_project/core/routes.dart';
-import 'package:appraisal_project/login/provider/login_provider.dart';
+import 'package:Appraisal/appraisal/provider/appriasal_provider.dart';
+import 'package:Appraisal/core/easyloading_config.dart';
+import 'package:Appraisal/core/hive_services.dart';
+import 'package:Appraisal/core/routes.dart';
+import 'package:Appraisal/login/provider/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';

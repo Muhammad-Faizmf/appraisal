@@ -1,10 +1,10 @@
-import 'package:appraisal_project/appraisal/provider/appriasal_provider.dart';
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/utils/scale_size.dart';
-import 'package:appraisal_project/widgets/custom_arrow_buttons.dart';
-import 'package:appraisal_project/widgets/employee_bio_data.dart';
-import 'package:appraisal_project/widgets/general_kpis.dart';
-import 'package:appraisal_project/widgets/recommendation_remarks.dart';
+import 'package:Appraisal/appraisal/provider/appriasal_provider.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/utils/scale_size.dart';
+import 'package:Appraisal/widgets/custom_arrow_buttons.dart';
+import 'package:Appraisal/widgets/employee_bio_data.dart';
+import 'package:Appraisal/widgets/general_kpis.dart';
+import 'package:Appraisal/widgets/recommendation_remarks.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

@@ -1,7 +1,7 @@
-import 'package:appraisal_project/appraisal/provider/appriasal_provider.dart';
-import 'package:appraisal_project/utils/scale_size.dart';
-import 'package:appraisal_project/widgets/custom_employee_container.dart';
-import 'package:appraisal_project/widgets/custom_text_fiel.dart';
+import 'package:Appraisal/appraisal/provider/appriasal_provider.dart';
+import 'package:Appraisal/utils/scale_size.dart';
+import 'package:Appraisal/widgets/custom_employee_container.dart';
+import 'package:Appraisal/widgets/custom_text_fiel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

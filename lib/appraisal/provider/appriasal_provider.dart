@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:appraisal_project/appraisal/models/get_all_kpis.dart';
-import 'package:appraisal_project/appraisal/models/group_kpi_model.dart';
+import 'package:Appraisal/appraisal/models/get_all_kpis.dart';
+import 'package:Appraisal/appraisal/models/group_kpi_model.dart';
 
-import 'package:appraisal_project/appraisal/models/hr_remarks_model.dart';
-import 'package:appraisal_project/appraisal/models/menu_model.dart';
-import 'package:appraisal_project/appraisal/models/heirarchy_appraisal_model.dart';
-import 'package:appraisal_project/appraisal/models/strength_model.dart';
-import 'package:appraisal_project/appraisal/models/traning_model.dart'
+import 'package:Appraisal/appraisal/models/hr_remarks_model.dart';
+import 'package:Appraisal/appraisal/models/menu_model.dart';
+import 'package:Appraisal/appraisal/models/heirarchy_appraisal_model.dart';
+import 'package:Appraisal/appraisal/models/strength_model.dart';
+import 'package:Appraisal/appraisal/models/traning_model.dart'
     show TrainingDevelopmentItem, traningModelFromJson;
-import 'package:appraisal_project/core/base_client.dart';
-import 'package:appraisal_project/core/core_urls.dart';
-import 'package:appraisal_project/core/hive_services.dart';
+import 'package:Appraisal/core/base_client.dart';
+import 'package:Appraisal/core/core_urls.dart';
+import 'package:Appraisal/core/hive_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -217,6 +217,7 @@ class AppraisalProvider extends ChangeNotifier {
   }
 
   getTraning() async {
+    groupedList = [];
     try {
       EasyLoading.show(status: "Feching traning...");
       final response = await BaseClient.get(
@@ -224,10 +225,14 @@ class AppraisalProvider extends ChangeNotifier {
         "appraisal/getTraining?EmpID=${heirarchyAppraisal![selectedApprisalHeirarchyIndex!].empId.toString()}",
       );
       hrTraning = traningModelFromJson(response.body).trainingDevelopement;
+
+    //  final groupedData = groupByCreater(hrTraning!);
+
    
       final groupedData = groupByCreater(
         traningModelFromJson(response.body).trainingDevelopement,
       );
+
       groupedList = groupedData.entries.toList();
     } catch (e) {
       EasyLoading.showInfo(e.toString());

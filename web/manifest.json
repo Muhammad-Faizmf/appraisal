@@ -1,11 +1,11 @@
 {
-    "name": "appraisal_project",
-    "short_name": "appraisal_project",
+    "name": "Appraisal",
+    "short_name": "Appraisal",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Appraisal For FF Steel",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

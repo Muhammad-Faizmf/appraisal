@@ -1,8 +1,8 @@
-import 'package:appraisal_project/appraisal/provider/appriasal_provider.dart';
-import 'package:appraisal_project/core/hive_services.dart';
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/utils/text_formatter.dart';
-import 'package:appraisal_project/widgets/custom_button.dart';
+import 'package:Appraisal/appraisal/provider/appriasal_provider.dart';
+import 'package:Appraisal/core/hive_services.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/utils/text_formatter.dart';
+import 'package:Appraisal/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
@@ -207,7 +207,7 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                               const SizedBox(height: 8),
-                  if (isSecondSupervisor)
+                  if (isSecondSupervisor || isFirstSupervisor)
                   Column(
                         children: [
                           TextField(
@@ -260,20 +260,51 @@ class _RecommendationAndRemarksState extends State<RecommendationAndRemarks> {
                 
                   const SizedBox(height: 10.0),
                   ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: provider.hrTraning?.length ?? 0,
-                    itemBuilder: (context, index) => ListTile(
-                      title: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.4),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                            "${index + 1}. ${provider.hrTraning![index].description}"),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: provider.groupedList.length,
+                  itemBuilder: (context, index) {
+                    final group = provider.groupedList[index];
+                    final createrName = group.value['createrName'];
+                    final descriptions =
+                        group.value['descriptions'] as List<String>;
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 6,
+                        horizontal: 12,
                       ),
-                    ),
-                  ),
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            // ignore: deprecated_member_use
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 5,
+                            blurRadius: 10,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            createrName,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: ColorConstant.hoverColor,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          ...descriptions.map((desc) => Text('- $desc')),
+                        ],
+                      ),
+                    );
+                  },
+                ),
                 ],
               ),
             ),

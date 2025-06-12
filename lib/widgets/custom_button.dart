@@ -1,5 +1,5 @@
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/utils/text_styles.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

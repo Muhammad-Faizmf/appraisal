@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:appraisal_project/core/exceptions.dart';
-import 'package:appraisal_project/core/hive_services.dart';
+import 'package:Appraisal/core/exceptions.dart';
+import 'package:Appraisal/core/hive_services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 

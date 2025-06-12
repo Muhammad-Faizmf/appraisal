@@ -1,9 +1,10 @@
-import 'package:appraisal_project/appraisal/screens/appraisal.dart';
-import 'package:appraisal_project/core/hive_services.dart';
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/utils/text_styles.dart';
+import 'package:Appraisal/appraisal/screens/appraisal.dart';
+import 'package:Appraisal/core/hive_services.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -49,15 +50,14 @@ class _DashboardState extends State<Dashboard> {
                           HiveService.getName().toString(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
-                          IconButton(
-                                onPressed: () {
-                                  HiveService.deleteHiveData();
-                                  GoRouter.of(context).go("/");
-                                },
-                                icon: Icon(
-                                  Icons.logout,
-                                  color: Colors.white,
-                                ))
+                        IconButton(
+                            onPressed: () async {
+                              await Hive.box('appraisal_session').clear();
+                               GoRouter.of(context).pushReplacement("/"); },
+                            icon: Icon(
+                              Icons.logout,
+                              color: Colors.white,
+                            ))
                       ],
                     ),
                   ],

@@ -1,8 +1,8 @@
-import 'package:appraisal_project/login/provider/login_provider.dart';
-import 'package:appraisal_project/utils/colors.dart';
-import 'package:appraisal_project/utils/text_formatter.dart';
-import 'package:appraisal_project/utils/text_styles.dart';
-import 'package:appraisal_project/widgets/custom_button.dart';
+import 'package:Appraisal/login/provider/login_provider.dart';
+import 'package:Appraisal/utils/colors.dart';
+import 'package:Appraisal/utils/text_formatter.dart';
+import 'package:Appraisal/utils/text_styles.dart';
+import 'package:Appraisal/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            "Sign In to\nApplication",
+                            "Sign In to\n Appraisal",
                             textAlign: TextAlign.center,
                             style: AppStyle.loginPageTitleWeb,
                           ),
@@ -146,6 +146,13 @@ class LoginScreen extends StatelessWidget {
                             child: TextFormField(
                               obscureText: provider.obscureText,
                               controller: provider.password,
+                              onFieldSubmitted: (value)  {
+                                   if (!provider.validateLogin()) {
+                              return;
+                            }
+                            provider.login(context);
+                                
+                              },
                               decoration: InputDecoration(
                                   contentPadding:
                                       const EdgeInsets.only(left: 20),
@@ -172,26 +179,7 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: 15.0,
                         ),
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 350),
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                value: provider.rememberPassword,
-                                onChanged: (value) {
-                                  // provider.setRememberPassword();
-                                },
-                                side: const BorderSide(
-                                  color: ColorConstant.darkGrey,
-                                ),
-                              ),
-                              Text(
-                                "Remember me",
-                                style: AppStyle.rememberMe,
-                              ),
-                            ],
-                          ),
-                        ),
+                       
                         const SizedBox(
                           height: 20.0,
                         ),

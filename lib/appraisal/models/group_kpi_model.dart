@@ -1,4 +1,4 @@
-import 'package:appraisal_project/appraisal/models/get_all_kpis.dart';
+import 'package:Appraisal/appraisal/models/get_all_kpis.dart';
 
 
 class GroupedKpi {
